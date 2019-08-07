@@ -13,8 +13,10 @@ namespace EntityFrameworkCoreProject.Models {
         protected override void OnConfiguring(DbContextOptionsBuilder builder) {
             var connStr = 
                 "server=localhost\\sqlexpress;database=AppEfDb;trusted_connection=true;";
+            builder.UseLazyLoadingProxies();
             builder.UseSqlServer(connStr);
         }
         public DbSet<Student> Students { get; set;  }
+        public DbSet<Major> Majors { get; set; }
     }
 }

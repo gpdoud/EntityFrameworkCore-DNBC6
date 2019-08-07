@@ -18,6 +18,13 @@ namespace EntityFrameworkCoreProject.Models {
         public double GPA { get; set; }
         public bool IsFulltime { get; set; } = true;
 
+        public int? MajorId { get; set; }
+        public virtual Major Major { get; set; }
+
+        public override string ToString() {
+            var major = this.Major == null ? "Undeclared" : this.Major.Description;
+            return $"Id[{this.Id}], Name[{this.Firstname} {this.Lastname}], Major[{major}]";
+        }
         public Student() {
 
         }
