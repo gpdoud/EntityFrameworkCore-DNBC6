@@ -6,8 +6,70 @@ using System.Linq;
 
 namespace EntityFrameworkCoreProject {
     class Program {
+        static void CourseInit() {
+            // create an instance of the context
+            var context = new AppDbContext();
+            //
+            // these courses are for the Math major
+            //
+            // get the major
+            var mathMajor = context.Majors.SingleOrDefault(m => m.Description.Contains("Math"));
+            // create the courses
+            var math101 = new Course {
+                Name = "Math 101",
+                Instructor = "Beene Kownter",
+                Credits = 5,
+                MajorId = mathMajor.Id
+            };
+            context.Courses.Add(math101);
+            var math102 = new Course {
+                Name = "Math 102",
+                Instructor = "Beene Kownter",
+                Credits = 5,
+                MajorId = mathMajor.Id
+            };
+            context.Courses.Add(math102);
+            var math103 = new Course {
+                Name = "Math 103",
+                Instructor = "Beene Kownter",
+                Credits = 5,
+                MajorId = mathMajor.Id
+            };
+            context.Courses.Add(math103);
+            //
+            // these courses are for the CS major
+            //  
+            // get the major
+            var csMajor = context.Majors.SingleOrDefault(m => m.Description.Contains("Computer"));
+            // create the courses
+            var cs101 = new Course {
+                Name = "CS 101",
+                Instructor = "Tot Algeek",
+                Credits = 3,
+                MajorId = csMajor.Id
+            };
+            context.Courses.Add(cs101);
+            var cs102 = new Course {
+                Name = "CS 102",
+                Instructor = "Tot Algeek",
+                Credits = 3,
+                MajorId = csMajor.Id
+            };
+            context.Courses.Add(cs102);
+            var cs103 = new Course {
+                Name = "CS 103",
+                Instructor = "Tot Algeek",
+                Credits = 3,
+                MajorId = csMajor.Id
+            };
+            context.Courses.Add(cs103);
+            // finally save all the changes (don't forget this!)
+            context.SaveChanges();
+        }
         static void Main(string[] args) {
-
+            CourseInit();
+        }
+        static void Run() { 
             #region Join
             //var db = new AppDbContext();
             //var studentsForMajor = db.Majors
