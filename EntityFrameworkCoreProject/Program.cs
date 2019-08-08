@@ -6,6 +6,23 @@ using System.Linq;
 
 namespace EntityFrameworkCoreProject {
     class Program {
+        static void ScheduleInit() {
+            // create an instance of the context
+            var context = new AppDbContext();
+            // get the student
+            var student = context.Students.SingleOrDefault(s => s.Lastname == "Rogers");
+            // get the courses
+            var courses = context.Courses.Where(c => c.Name.Contains("103")).ToArray();
+            // schedule the student for all the courses
+            foreach(var course in courses) {
+                var schedule = new Schedule {
+                    StudentId = student.Id, CourseId = course.Id, Grade = -1
+                };
+                context.Schedules.Add(schedule);
+            }
+            // save to the database
+            context.SaveChanges();
+        }
         static void CourseInit() {
             // create an instance of the context
             var context = new AppDbContext();
@@ -65,9 +82,6 @@ namespace EntityFrameworkCoreProject {
             context.Courses.Add(cs103);
             // finally save all the changes (don't forget this!)
             context.SaveChanges();
-        }
-        static void Main(string[] args) {
-            CourseInit();
         }
         static void Run() { 
             #region Join
@@ -222,6 +236,9 @@ namespace EntityFrameworkCoreProject {
             //    Console.WriteLine(student);
             //}
 
+        }
+        static void Main(string[] args) {
+            ScheduleInit();
         }
     }
 }

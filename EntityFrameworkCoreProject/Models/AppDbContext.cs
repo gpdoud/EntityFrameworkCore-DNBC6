@@ -9,7 +9,10 @@ namespace EntityFrameworkCoreProject.Models {
     public class AppDbContext : DbContext  {
 
         public AppDbContext() : base() { }
-
+        #region OnModelCreating()
+        protected override void OnModelCreating(ModelBuilder builder) {
+        }
+        #endregion
         protected override void OnConfiguring(DbContextOptionsBuilder builder) {
             var connStr = 
                 "server=localhost\\sqlexpress;database=AppEfDb;trusted_connection=true;";
@@ -19,5 +22,6 @@ namespace EntityFrameworkCoreProject.Models {
         public DbSet<Student> Students { get; set;  }
         public DbSet<Major> Majors { get; set; }
         public DbSet<Course> Courses { get; set;  }
+        public DbSet<Schedule> Schedules { get; set; }
     }
 }
